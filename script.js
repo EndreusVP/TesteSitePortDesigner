@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mini = document.querySelector('.mini-float');
     const hero = document.querySelector('.hero');
     const footer = document.querySelector('.cyber-footer');
+    const comicOverlay = document.querySelector('.comic-overlay');
 
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (scrollY > heroHeight - 300) { mini.style.opacity = "1"; } else { mini.style.opacity = "0"; }
 
+        // Ajuste da posição da mini persona para não cobrir o footer
         if (footerRect.top < (windowHeight / 2) + 100) { 
             mini.style.position = 'absolute';
             mini.style.top = (footer.offsetTop - 120) + "px";
@@ -38,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollRange = fullHeight - heroHeight - footer.offsetHeight;
         const scrollPercent = Math.max(0, Math.min(1, (scrollY - heroHeight) / scrollRange));
         mini.style.right = (5 + (scrollPercent * 80)) + "%";
+
+        if (comicOverlay) {
+            comicOverlay.style.backgroundPosition = `0px 0px, 0px ${scrollY * 0.1}px`;
+        }
     });
 
     const modal = document.getElementById('video-modal');
